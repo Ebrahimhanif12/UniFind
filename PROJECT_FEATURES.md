@@ -1,4 +1,4 @@
-"# Implemented Features" 
+# Implemented Features
 
 ## T-01: Initial Project Structure (MVC)
 This task involves setting up the folder structure for the project following MVC architecture.
