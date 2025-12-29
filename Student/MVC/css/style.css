@@ -1,0 +1,149 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+/* primary colors according to aiub logo*/
+:root {
+    --primary-blue: #0056D2; 
+    --accent-gold: #F4C430;  
+    --text-dark: #2c3e50;
+    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --shadow: 0 10px 30px rgba(0, 86, 210, 0.15);
+}
+
+body {
+    font-family: 'Poppins', sans-serif; 
+    background: var(--bg-gradient);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px; 
+    background: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--primary-blue);
+    position: relative;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-header img {
+    width: 60px; 
+    margin-bottom: 10px;
+}
+
+.auth-header h2 {
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.auth-header p {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.row-group {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px; 
+    position: relative; 
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    background: #fdfdfd;
+}
+
+.form-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.1);
+    outline: none;
+    background: white;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 35px; 
+    cursor: pointer;
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+.toggle-password:hover {
+    color: var(--primary-blue);
+}
+
+.btn-reg {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    margin-top: 10px;
+}
+
+.btn-reg:hover {
+    background-color: #0044a6;
+    transform: translateY(-2px);
+}
+
+.link-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.8rem;
+}
+
+.link-text a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 38px; 
+    cursor: pointer;
+    width: 20px;  
+    height: 20px;
+    opacity: 0.6; 
+    transition: opacity 0.3s;
+}
+
+.toggle-password:hover {
+    opacity: 1;   
+}
