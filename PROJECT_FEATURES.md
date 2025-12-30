@@ -10,3 +10,9 @@ Designed and implemented the relational database schema.
 - Defined tables: Users, Items, Claims, Subscriptions, CustodyLogs
 - Verified schema import in MySQL/phpMyAdmin
 **Status: Implemented**
+
+
+## T-05: User Registration for Student
+- Created Registration form view
+- Validated user inputs
+- connected with user table in db

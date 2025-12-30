@@ -1,13 +1,13 @@
 <?php
 session_start();
-// Helper function to show error message
+//function to show error message
 function showError($field) {
     if (isset($_SESSION['errors'][$field])) {
         echo '<span class="error-msg">' . $_SESSION['errors'][$field] . '</span>';
     }
 }
 
-// Helper to keep old values
+//  function to keep old values
 function old($field) {
     if (isset($_SESSION['old_data'][$field])) {
         echo htmlspecialchars($_SESSION['old_data'][$field]);
@@ -97,7 +97,7 @@ function old($field) {
 </html>
 
 <?php
-// Clear errors after displaying them so they don't show up on refresh
+// Clearing errors after displaying .
 unset($_SESSION['errors']);
 unset($_SESSION['old_data']);
 ?>
