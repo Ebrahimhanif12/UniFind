@@ -1,3 +1,20 @@
+<?php
+session_start();
+// Helper function to show error message
+function showError($field) {
+    if (isset($_SESSION['errors'][$field])) {
+        echo '<span class="error-msg">' . $_SESSION['errors'][$field] . '</span>';
+    }
+}
+
+// Helper to keep old values
+function old($field) {
+    if (isset($_SESSION['old_data'][$field])) {
+        echo htmlspecialchars($_SESSION['old_data'][$field]);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,29 +39,34 @@
             <div class="row-group">
                 <div class="form-group" style="flex: 1;">
                     <label>Full Name</label>
-                    <input type="text" name="full_name" class="form-control" placeholder="Ebrahim Hanif" required>
+                    <input type="text" name="full_name" class="form-control" value="<?php old('full_name'); ?>" placeholder="Ebrahim Hanif">
+                    <?php showError('full_name'); ?>
                 </div>
                 <div class="form-group" style="flex: 1;">
                     <label>Student ID</label>
-                    <input type="text" name="student_id" class="form-control" placeholder="XX-XXXXX-X" required>
+                    <input type="text" name="student_id" class="form-control" value="<?php old('student_id'); ?>" placeholder="XX-XXXXX-X">
+                    <?php showError('student_id'); ?>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" name="email" class="form-control" placeholder="xx-xxxxx-x@student.aiub.edu" required>
+                <input type="email" name="email" class="form-control" value="<?php old('email'); ?>" placeholder="student@university.edu">
+                <?php showError('email'); ?>
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" id="passInput" class="form-control" placeholder="Create password" required>
+                <input type="password" name="password" id="passInput" class="form-control" placeholder="Create password">
                 <img src="../images/eye-open.png" class="toggle-password" onclick="togglePass('passInput', this)">
+                <?php showError('password'); ?>
             </div>
 
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" name="confirm_password" id="confirmInput" class="form-control" placeholder="Confirm password" required>
+                <input type="password" name="confirm_password" id="confirmInput" class="form-control" placeholder="Confirm password">
                 <img src="../images/eye-open.png" class="toggle-password" onclick="togglePass('confirmInput', this)">
+                <?php showError('confirm_password'); ?>
             </div>
 
             <button type="submit" class="btn-reg">Register</button>
@@ -73,3 +95,9 @@
 
 </body>
 </html>
+
+<?php
+// Clear errors after displaying them so they don't show up on refresh
+unset($_SESSION['errors']);
+unset($_SESSION['old_data']);
+?>
