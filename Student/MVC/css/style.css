@@ -147,3 +147,16 @@ body {
 .toggle-password:hover {
     opacity: 1;   
 }
+
+.error-msg {
+    color: #e74c3c; 
+    font-size: 0.75rem;
+    margin-top: 2px;
+    display: block;
+    font-weight: 400;
+}
+
+.form-control.input-error {
+    border-color: #e74c3c; 
+    background-color: #fceae9; 
+}
