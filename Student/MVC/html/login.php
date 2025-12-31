@@ -17,7 +17,7 @@ function showError($field) {
     <title>Login | UniFind</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body class="auth-mode">
 
     <div class="auth-container">
         <div class="auth-header">

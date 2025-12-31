@@ -1,11 +1,12 @@
 <?php
 session_start();
+include '../db/db_conn.php';
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Helper: Get Initials (e.g. "Ebrahim Hanif" -> "EH")
 function getInitials($name) {
     $words = explode(" ", $name);
     $initials = "";
@@ -14,6 +15,8 @@ function getInitials($name) {
     }
     return strtoupper(substr($initials, 0, 2));
 }
+
+$page = isset($_GET['page']) ? $_GET['page'] : 'feed';
 ?>
 
 <!DOCTYPE html>
@@ -24,23 +27,16 @@ function getInitials($name) {
     <title>Dashboard | UniFind</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* Force the grid to show 4 items in a row */
-        .stats-grid {
-            display: grid;
-            /* This forces 4 equal columns */
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        /* Responsive: If screen is small, switch to 2x2 */
-        @media (max-width: 1000px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        .activity-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .activity-table th, .activity-table td { padding: 15px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+        .activity-table th { background-color: #f8f9fa; font-weight: 600; color: #555; }
+        .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; }
+        .status-lost { background: #ffebee; color: #c62828; }
+        .status-found { background: #e8f5e9; color: #2e7d32; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+        @media (max-width: 1000px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
@@ -54,17 +50,28 @@ function getInitials($name) {
             </div>
 
             <ul class="nav-links">
-                <li><a href="#" class="active"><i class="fas fa-th-large"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-search"></i> Lost Items</a></li>
-                <li><a href="#"><i class="fas fa-hand-holding-heart"></i> Found Items</a></li>
-                <li><a href="#"><i class="fas fa-history"></i> My History</a></li>
-                <li><a href="#"><i class="fas fa-user-cog"></i> Settings</a></li>
-            </ul>
+                <li>
+                    <a href="dashboard.php?page=feed" class="<?php echo ($page == 'feed') ? 'active' : ''; ?>">
+                        <i class="fas fa-stream"></i> Feed
+                    </a>
+                </li>
+
+                <li>
+                    <a href="dashboard.php?page=home" class="<?php echo ($page == 'home') ? 'active' : ''; ?>">
+                        <i class="fas fa-chart-pie"></i> My Dashboard
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="dashboard.php?page=report_lost" class="<?php echo ($page == 'report_lost') ? 'active' : ''; ?>">
+                        <i class="fas fa-plus-circle"></i> Post Lost Item
+                    </a>
+                </li>
+                
+                </ul>
 
             <div class="sidebar-footer">
-                <a href="../php/logout.php" class="btn-primary" style="text-align: center; display: block; text-decoration: none;">
-                    Logout
-                </a>
+                <a href="../php/logout.php" class="btn-primary" style="text-align: center; display: block; text-decoration: none;">Logout</a>
             </div>
         </aside>
 
@@ -72,7 +79,13 @@ function getInitials($name) {
             
             <header class="top-header">
                 <div class="header-title">
-                    <h1>Overview</h1>
+                    <h1>
+                        <?php 
+                            if($page == 'home') echo "Dashboard";
+                            elseif($page == 'report_lost') echo "Report a Lost Item";
+                            else echo "Feed";
+                        ?>
+                    </h1>
                 </div>
                 
                 <div class="user-profile">
@@ -86,55 +99,30 @@ function getInitials($name) {
                 </div>
             </header>
 
-            <div class="content-padding">
+           <div class="content-padding">
                 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-blue">
-                            <i class="fas fa-box-open"></i>
-                        </div>
-                        <div>
-                            <h3>0</h3>
-                            <p>Active Claims</p>
-                        </div>
-                    </div>
+                <?php 
+ 
+                
+                if ($page == 'home') {
+   
+                    $my_id = $_SESSION['user_id'];
+                    $sql_my_items = "SELECT * FROM items WHERE user_id = '$my_id' ORDER BY created_at DESC";
+                    $my_items_result = $conn->query($sql_my_items);
+                    $total_posts = $my_items_result->num_rows;
+                    include 'view_home.php'; 
+                
+                } elseif ($page == 'feed') {
+                   
+                    include 'view_feed.php';
 
-                    <div class="stat-card">
-                        <div class="stat-icon icon-gold">
-                            <i class="fas fa-exclamation-circle"></i>
-                        </div>
-                        <div>
-                            <h3>0</h3>
-                            <p>Reported Lost</p>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon icon-green">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div>
-                            <h3>0</h3>
-                            <p>Items Recovered</p>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon icon-purple" style="background: #f3e5f5; color: #9c27b0;">
-                            <i class="fas fa-medal"></i>
-                        </div>
-                        <div>
-                            <h3><?php echo isset($_SESSION['karma_points']) ? $_SESSION['karma_points'] : 0; ?></h3>
-                            <p>Karma Points</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: white; padding: 40px; border-radius: 12px; text-align: center; color: #888;">
-                    <img src="../images/American_International_University-Bangladesh_Monogram.svg.png" style="width: 80px; opacity: 0.5; margin-bottom: 20px;">
-                    <h2>Welcome to AIUB UniFind</h2>
-                    <p>Select an option from the sidebar to start reporting lost or found items.</p>
-                </div>
+                } elseif ($page == 'report_lost') {
+                    include 'view_report_lost.php'; 
+                
+                } else {
+                    echo "<h2>Page not found</h2>";
+                }
+                ?>
 
             </div>
         </div>

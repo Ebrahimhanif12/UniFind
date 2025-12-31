@@ -12,11 +12,16 @@
 body {
     font-family: 'Poppins', sans-serif; 
     background: var(--bg-gradient);
+    margin: 0;
+    /* REMOVED: display: flex, height: 100vh, align-items, justify-content */
+}
+
+/* NEW CLASS: Only for Login & Register pages */
+body.auth-mode {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
 }
 
 .auth-container {
