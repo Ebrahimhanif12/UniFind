@@ -67,6 +67,11 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'feed';
                         <i class="fas fa-plus-circle"></i> Post Lost Item
                     </a>
                 </li>
+                 <li>
+                    <a href="dashboard.php?page=report_found" class="<?php echo $page == 'report_found' ? 'active' : ''; ?>">
+                      <i class="fas fa-hand-holding-heart"></i> Post Found Item
+                    </a>
+                </li>
                 
                 </ul>
 
@@ -83,7 +88,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'feed';
                         <?php 
                             if($page == 'home') echo "Dashboard";
                             elseif($page == 'report_lost') echo "Report a Lost Item";
-                            else echo "Feed";
+                            elseif($page == 'feed') echo "Feed";
+                            elseif($page == 'report_found') echo "Report a Found Item";
                         ?>
                     </h1>
                 </div>
@@ -119,7 +125,11 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'feed';
                 } elseif ($page == 'report_lost') {
                     include 'view_report_lost.php'; 
                 
-                } else {
+                } 
+                elseif ($page == 'report_found') { 
+                    include 'view_report_found.php';
+                }
+                else {
                     echo "<h2>Page not found</h2>";
                 }
                 ?>
