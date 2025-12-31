@@ -161,16 +161,13 @@ body {
     background-color: #fceae9; 
 }
 
-/* --- PROFESSIONAL DASHBOARD LAYOUT --- */
 
-/* 1. The Layout Grid */
 .dashboard-layout {
     display: flex;
     min-height: 100vh;
-    background-color: #f0f2f5; /* Premium soft grey */
+    background-color: #f0f2f5; 
 }
 
-/* 2. Sidebar (Left Panel) */
 .sidebar {
     width: 260px;
     background-color: white;
@@ -229,9 +226,8 @@ body {
     font-size: 1.1rem;
 }
 
-/* Active/Hover State */
 .nav-links a:hover, .nav-links a.active {
-    background-color: #eef4ff; /* Light Blue */
+    background-color: #eef4ff; 
     color: var(--primary-blue);
 }
 
@@ -240,15 +236,13 @@ body {
     border-top: 1px solid #f0f0f0;
 }
 
-/* 3. Main Content (Right Panel) */
 .main-content {
     flex-grow: 1;
-    margin-left: 260px; /* Same as sidebar width */
+    margin-left: 260px; 
     display: flex;
     flex-direction: column;
 }
 
-/* 4. Top Header */
 .top-header {
     background: white;
     height: 70px;
@@ -300,13 +294,11 @@ body {
     font-size: 1.2rem;
 }
 
-/* 5. Dashboard Cards Area */
 .content-padding {
     padding: 30px;
 }
 
 .stats-grid {
-    /* Change from repeat(3, 1fr) to repeat(4, 1fr) or auto-fit */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     gap: 20px;
