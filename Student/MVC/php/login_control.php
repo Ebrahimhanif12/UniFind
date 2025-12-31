@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['full_name'] = $row['full_name'];
             $_SESSION['role'] = $row['role']; 
             $_SESSION['student_id'] = $row['student_id'];
+            $_SESSION['karma_points'] = $row['karma_points'];
 
             if ($row['role'] == 'admin') {
                 echo "Welcome Admin! (Dashboard WIP)"; 
@@ -42,11 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Welcome staff! (Dashboard WIP)";
             } 
             else {
-                 // Redirect to student dashboard latter.
-                echo "<script>
-                        alert('Login Successful! Welcome, " . $row['full_name'] . "'); 
-                        window.location.href = '../html/login.php';  
-                      </script>";
+                header("Location: ../html/dashboard.php");
+                exit();
             }
             exit();
 
