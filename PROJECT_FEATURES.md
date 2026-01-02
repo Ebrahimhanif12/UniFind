@@ -16,3 +16,25 @@ Designed and implemented the relational database schema.
 - Created Registration form view
 - Validated user inputs
 - connected with user table in db
+
+## T-06:Login System implemented
+
+
+## T-07: Student Dashboard 
+- Dashboard
+- Recen posts
+- Karma points
+
+## T-08: Report lost item and feed 
+- Post form for lost items
+- Saved to db
+- Feed implemented for both lost and found
+
+## T-09: Report Found items 
+- Post form for found items
+- saved to database
+
+## T-10: Clime Items 
+- view claim page with security question
+- checked valid security answer
+- displayed founder info if answer match

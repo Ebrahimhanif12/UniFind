@@ -106,9 +106,17 @@ $result = $conn->query($sql);
                         </span>
                     </div>
 
-                    <button style="width: 100%; background: <?php echo $btnColor; ?>; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;">
-                        <i class="fas fa-hand-paper" style="margin-right: 5px;"></i> <?php echo $btnText; ?>
-                    </button>
+                    <?php if ($isLost): ?>
+                        <button onclick="alert('Feature coming soon: Notify owner that you found this!')" 
+                                style="width: 100%; background: var(--primary-blue); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-search-location"></i> I Found This
+                        </button>
+                    <?php else: ?>
+                        <a href="dashboard.php?page=claim&item_id=<?php echo $row['item_id']; ?>" 
+                           style="display: block; text-align: center; text-decoration: none; width: 100%; background: #27ae60; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-hand-paper"></i> Claim Item
+                        </a>
+                    <?php endif; ?>
                 </div>
 
                 <div style="padding: 12px 20px; border-top: 1px solid #f9f9f9; display: flex; align-items: center; gap: 10px;">

@@ -129,6 +129,10 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'feed';
                 elseif ($page == 'report_found') { 
                     include 'view_report_found.php';
                 }
+                elseif ($page == 'claim') { 
+                    include 'view_claim.php';
+                
+                }
                 else {
                     echo "<h2>Page not found</h2>";
                 }
