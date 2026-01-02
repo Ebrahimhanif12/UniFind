@@ -106,11 +106,13 @@ $result = $conn->query($sql);
                         </span>
                     </div>
 
-                    <?php if ($isLost): ?>
-                        <button onclick="alert('Feature coming soon: Notify owner that you found this!')" 
-                                style="width: 100%; background: var(--primary-blue); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                   <?php if ($isLost): ?>
+                        
+                        <a href="dashboard.php?page=contact_owner&item_id=<?php echo $row['item_id']; ?>" 
+                           style="display: block; text-align: center; text-decoration: none; width: 100%; background: var(--primary-blue); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">
                             <i class="fas fa-search-location"></i> I Found This
-                        </button>
+                        </a>
+
                     <?php else: ?>
                         <a href="dashboard.php?page=claim&item_id=<?php echo $row['item_id']; ?>" 
                            style="display: block; text-align: center; text-decoration: none; width: 100%; background: #27ae60; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">

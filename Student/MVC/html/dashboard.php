@@ -133,6 +133,10 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'feed';
                     include 'view_claim.php';
                 
                 }
+                elseif ($page == 'contact_owner') { 
+                    include 'view_contact_owner.php';
+                
+                }
                 else {
                     echo "<h2>Page not found</h2>";
                 }
