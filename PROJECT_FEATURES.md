@@ -38,3 +38,6 @@ Designed and implemented the relational database schema.
 - view claim page with security question
 - checked valid security answer
 - displayed founder info if answer match
+
+## T-11: ACtive I found button.
+- Displayed owner info 
