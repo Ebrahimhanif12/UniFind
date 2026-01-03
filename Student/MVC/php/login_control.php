@@ -36,9 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['student_id'] = $row['student_id'];
             $_SESSION['karma_points'] = $row['karma_points'];
 
-            if ($row['role'] == 'admin') {
-                echo "Welcome Admin! (Dashboard WIP)"; 
-            } 
+            if ($row['role'] === 'admin') {
+                header("Location: ../../../Admin/MVC/html/dashboard.php");
+            }
             elseif ($row['role'] == 'staff') {
                 echo "Welcome staff! (Dashboard WIP)";
             } 
