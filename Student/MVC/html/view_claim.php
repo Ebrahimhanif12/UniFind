@@ -5,7 +5,7 @@ if (!isset($_GET['item_id'])) {
 }
 
 $item_id = $conn->real_escape_string($_GET['item_id']);
-$sql = "SELECT * FROM items WHERE item_id = '$item_id' AND status = 'found'";
+$sql = "SELECT * FROM items WHERE item_id = '$item_id' AND status IN ('found', 'claimed')";
 $result = $conn->query($sql);
 
 if ($result->num_rows == 0) {

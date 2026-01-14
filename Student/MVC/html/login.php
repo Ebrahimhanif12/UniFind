@@ -23,7 +23,9 @@ function showError($field) {
         <div class="auth-header">
             <img src="../images/American_International_University-Bangladesh_Monogram.svg.png" alt="UniFind Logo">
             <h2>Welcome Back</h2>
+            
             <p>Login to your account</p>
+            <p  >The Secure Campus Lost & Found System</p>
         </div>
 
         <form action="../php/login_control.php" method="POST">

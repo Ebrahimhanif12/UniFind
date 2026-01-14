@@ -1,18 +1,23 @@
 <?php
+// VIEW: GLOBAL FEED (Lost & Found)
+
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 
+// Fetch items and user info
 $sql = "SELECT items.*, users.full_name, users.student_id 
         FROM items 
         JOIN users ON items.user_id = users.user_id 
         WHERE (title LIKE '%$search%' OR description LIKE '%$search%' OR location LIKE '%$search%') ";
 
+// Filter Logic
 if ($filter == 'lost') {
     $sql .= " AND status = 'lost'";
 } elseif ($filter == 'found') {
     $sql .= " AND status = 'found'";
 } else {
-    $sql .= " AND status IN ('lost', 'found')";
+    // Show active items (exclude claimed unless you want to see history)
+    $sql .= " AND status IN ('lost', 'found') AND status != 'claimed'";
 }
 
 $sql .= " ORDER BY created_at DESC";
@@ -25,7 +30,8 @@ $result = $conn->query($sql);
     <div style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
         
         <form action="dashboard.php" method="GET" style="flex-grow: 1; display: flex; gap: 10px;">
-            <input type="hidden" name="page" value="feed"> <div style="position: relative; flex-grow: 1;">
+            <input type="hidden" name="page" value="feed"> 
+            <div style="position: relative; flex-grow: 1;">
                 <i class="fas fa-search" style="position: absolute; left: 15px; top: 12px; color: #999;"></i>
                 <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search for 'Wallet', 'Annex 1', 'Canon Camera'..." 
                        style="width: 100%; padding: 10px 10px 10px 40px; border: 1px solid #ddd; border-radius: 8px; outline: none; box-sizing: border-box;">
@@ -58,13 +64,11 @@ $result = $conn->query($sql);
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                //dynamic style for lost and found items
                 
+                // --- DYNAMIC STYLES ---
                 $isLost = ($row['status'] == 'lost');
                 $badgeColor = $isLost ? '#e74c3c' : '#27ae60'; 
                 $badgeText = $isLost ? 'LOST' : 'FOUND';
-                $btnText = $isLost ? 'I Found This' : 'Claim Item';
-                $btnColor = $isLost ? 'var(--primary-blue)' : '#27ae60';
                 
                 $imgSource = !empty($row['image_path']) ? "../uploads/" . htmlspecialchars($row['image_path']) : "";
         ?>
@@ -106,7 +110,18 @@ $result = $conn->query($sql);
                         </span>
                     </div>
 
-                   <?php if ($isLost): ?>
+                    <?php 
+                    // Check if current user is the poster
+                    $is_my_post = ($row['user_id'] == $_SESSION['user_id']);
+                    ?>
+
+                    <?php if ($is_my_post): ?>
+                        
+                        <button disabled style="width: 100%; background: #95a5a6; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: not-allowed;">
+                            <i class="fas fa-user"></i> You Posted This
+                        </button>
+
+                    <?php elseif ($isLost): ?>
                         
                         <a href="dashboard.php?page=contact_owner&item_id=<?php echo $row['item_id']; ?>" 
                            style="display: block; text-align: center; text-decoration: none; width: 100%; background: var(--primary-blue); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">
@@ -114,11 +129,14 @@ $result = $conn->query($sql);
                         </a>
 
                     <?php else: ?>
+                        
                         <a href="dashboard.php?page=claim&item_id=<?php echo $row['item_id']; ?>" 
                            style="display: block; text-align: center; text-decoration: none; width: 100%; background: #27ae60; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">
                             <i class="fas fa-hand-paper"></i> Claim Item
                         </a>
+                        
                     <?php endif; ?>
+
                 </div>
 
                 <div style="padding: 12px 20px; border-top: 1px solid #f9f9f9; display: flex; align-items: center; gap: 10px;">

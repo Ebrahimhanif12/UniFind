@@ -38,17 +38,20 @@
             <tbody>
                 <?php while($row = $my_items_result->fetch_assoc()): ?>
                 <tr>
-                    <td>
-                        <strong><?php echo htmlspecialchars($row['title']); ?></strong><br>
-                        <span style="font-size:0.85rem; color:#888;"><?php echo htmlspecialchars($row['location']); ?></span>
+                  <td>
+                        <a href="dashboard.php?page=contact_owner&item_id=<?php echo $row['item_id']; ?>" 
+                           style="color: var(--primary-blue); font-size: 0.9rem; margin-right: 10px; text-decoration: none;">
+                           View
+                        </a>
+
+                       <?php if($row['status'] == 'lost'): ?>
+                            <a href="../php/mark_returned.php?item_id=<?php echo $row['item_id']; ?>" 
+                               onclick="return confirm('Mark this item as Returned? This will move it to history, but NOT delete it.');"
+                               style="color: #27ae60; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+                               <i class="fas fa-check"></i> Got it!
+                            </a>
+                        <?php endif; ?>
                     </td>
-                    <td><?php echo date('M d, Y', strtotime($row['lost_date'])); ?></td>
-                    <td>
-                        <span class="status-badge status-<?php echo $row['status']; ?>">
-                            <?php echo ucfirst($row['status']); ?>
-                        </span>
-                    </td>
-                    <td><a href="#" style="color: var(--primary-blue);">View</a></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
