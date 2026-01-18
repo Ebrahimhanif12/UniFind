@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: ../../../Admin/MVC/html/dashboard.php");
             }
             elseif ($row['role'] == 'staff') {
-                echo "Welcome staff! (Dashboard WIP)";
+                header("Location: ../../../Staff/MVC/html/dashboard.php");
             } 
             else {
                 header("Location: ../html/dashboard.php");
