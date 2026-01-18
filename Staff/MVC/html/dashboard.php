@@ -106,7 +106,12 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'overview';
                     include 'view_overview.php';
                 } elseif ($page == 'custody') {
                     include 'view_custody.php';
-                } elseif ($page == 'fraud') {
+                } 
+                elseif ($page == 'generate_qr') {
+                    include 'view_qr.php';
+
+                }
+                elseif ($page == 'fraud') {
                     include 'view_fraud.php';
                 } else {
                     echo "<h2>Page Not Found</h2>";
