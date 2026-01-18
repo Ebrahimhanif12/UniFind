@@ -2,6 +2,8 @@
 session_start();
 include '../db/db_conn.php';
 
+include '../php/check_ban_status.php';
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
