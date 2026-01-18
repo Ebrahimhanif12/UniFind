@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
         $conn->begin_transaction();
 
         try {
-             Update Item Status to 'claimed'
+             //pdate Item Status to 'claimed'
             $conn->query("UPDATE items SET status = 'claimed' WHERE item_id = '$item_id'");
 
             //Add to Custody Log (Chain of Custody)
