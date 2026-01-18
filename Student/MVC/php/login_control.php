@@ -28,6 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
 
         if (password_verify($password, $row['password'])) {
+            if ($row['is_banned'] == 1) {
+        echo "<script>alert('Your account has been suspended due to suspicious activity. Please contact the administration.'); window.location.href='../html/login.php';</script>";
+        exit();
+    }
+
+
+
+
             
             
             $_SESSION['user_id'] = $row['user_id'];
