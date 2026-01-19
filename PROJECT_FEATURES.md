@@ -41,3 +41,22 @@ Designed and implemented the relational database schema.
 
 ## T-11: Active I found button.
 - Displayed owner info 
+
+
+## T-12: Logout.
+- Logout logics implemented
+
+## T-13:Staff Dashboard 
+- Staff Dashboard view added
+- Insight and Reports view added
+- Custody logs added
+- Fraud controll added 
+
+## T-14: Profile Management
+- Profile management for Adding profile image, Contact Number and Nickname
+
+## T-15: Poster Generation.
+- Autometic poster generation for lost item added
+ 
+
+
