@@ -82,6 +82,7 @@ if ($announcement) {
                 <li><a href="dashboard.php?page=home" class="<?php echo ($page == 'home') ? 'active' : ''; ?>"><i class="fas fa-chart-pie"></i> My Dashboard</a></li>
                 <li><a href="dashboard.php?page=report_lost" class="<?php echo ($page == 'report_lost') ? 'active' : ''; ?>"><i class="fas fa-plus-circle"></i> Post Lost Item</a></li>
                 <li><a href="dashboard.php?page=report_found" class="<?php echo $page == 'report_found' ? 'active' : ''; ?>"><i class="fas fa-hand-holding-heart"></i> Post Found Item</a></li>
+                <li><a href="dashboard.php?page=profile" class="<?php echo ($page == 'profile') ? 'active' : ''; ?>"><i class="fas fa-user-cog"></i> Profile Settings</a></li>
             </ul>
 
             <div class="sidebar-footer ">
@@ -100,6 +101,7 @@ if ($announcement) {
                             elseif($page == 'feed') echo "Global Feed";
                             elseif($page == 'report_found') echo "Report a Found Item";
                             elseif($page == 'claim') echo "Claim Item";
+                            elseif($page == 'profile') echo "Profile Settings";
                             else echo "Dashboard";
                         ?>
                     </h1>
@@ -110,9 +112,18 @@ if ($announcement) {
                         <span class="name"><?php echo htmlspecialchars($_SESSION['full_name']); ?></span>
                         <span class="role">Student ID: <?php echo htmlspecialchars($_SESSION['student_id']); ?></span>
                     </div>
-                    <div class="profile-icon">
-                        <?php echo getInitials($_SESSION['full_name']); ?>
-                    </div>
+                    <div class="profile-icon" style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                      <?php 
+                       // Check if session has a profile image (updated by login or update_profile.php)
+                       if (isset($_SESSION['profile_image']) && !empty($_SESSION['profile_image'])) {
+                       echo '<img src="../uploads/' . htmlspecialchars($_SESSION['profile_image']) . '" style="width: 100%; height: 100%; object-fit: cover;">';
+                       } else {
+                     // Fallback to Initials
+                      echo getInitials($_SESSION['full_name']);
+                     }
+                     ?>
+</div>
+
                 </div>
             </header>
 
@@ -128,6 +139,7 @@ if ($announcement) {
                 } elseif ($page == 'report_found') { include 'view_report_found.php';
                 } elseif ($page == 'claim') { include 'view_claim.php';
                 } elseif ($page == 'contact_owner') { include 'view_contact_owner.php';
+                } elseif ($page == 'profile') { include 'view_profile.php';
                 } else { echo "<div style='text-align:center; padding:50px; color:#888;'><h2>Page not found</h2></div>"; }
                 ?>
             </div>
