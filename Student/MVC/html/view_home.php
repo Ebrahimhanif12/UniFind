@@ -74,6 +74,11 @@
                                    style="color: #27ae60; background: #e8f5e9; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem; text-decoration: none;" title="I found my item">
                                    <i class="fas fa-check"></i>
                                 </a>
+                                <a href="generate_poster.php?item_id=<?php echo $row['item_id']; ?>" target="_blank"
+                               style="color: #fff; background: #e67e22; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem; text-decoration: none; margin-left: 5px;" 
+                                title="Generate Poster">
+                            <i class="fas fa-file-pdf"></i> Poster
+                          </a>
                             <?php endif; ?>
 
                             <a href="../php/delete_post.php?id=<?php echo $row['item_id']; ?>" 
