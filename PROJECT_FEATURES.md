@@ -39,5 +39,5 @@ Designed and implemented the relational database schema.
 - checked valid security answer
 - displayed founder info if answer match
 
-## T-11: ACtive I found button.
+## T-11: Active I found button.
 - Displayed owner info 
