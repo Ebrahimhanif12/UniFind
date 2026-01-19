@@ -2,6 +2,8 @@
 session_start();
 include '../db/db_conn.php';
 
+include '../php/check_ban_status.php';
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -137,6 +139,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'feed';
                     include 'view_contact_owner.php';
                 
                 }
+                
                 else {
                     echo "<h2>Page not found</h2>";
                 }
