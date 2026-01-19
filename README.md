@@ -100,8 +100,8 @@ If a student finds a wallet but doesn't want to hold it, they drop it at the Adm
 
 **Supervised by:**
 **SULTANUL ARIFEEN HAMIM**
-Faculty, Dept of Computer Science
-American International University-Bangladesh (AIUB)
+* Faculty, Dept of Computer Science
+* American International University-Bangladesh (AIUB)
 
 ---
 
