@@ -32,7 +32,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'overview';
 
         body { background-color: var(--uni-light); }
         
-        .sidebar { background-color: var(--uni-primary); color: white; }
+        .sidebar { background-color: #f4f6f9; color: black; }
         .nav-links a { color: #bdc3c7; border-left: 4px solid transparent; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { 
             background-color: rgba(255,255,255,0.1); 
@@ -49,25 +49,25 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'overview';
     <div class="dashboard-layout">
         
         <aside class="sidebar">
-            <div class="brand-box" style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <h2 style="margin: 0; color: white;">UniFind <span style="font-size:0.8rem; background:#27ae60; padding:2px 6px; border-radius:4px;">STAFF</span></h2>
+            <div class="brand-box" style="padding: 20px; border-bottom: 1px solid #0056b3;">
+                <h2 style="margin: 0; color: #0056b3;">UniFind <span style="font-size:0.8rem; background:#27ae60; padding:2px 6px; border-radius:4px;">STAFF</span></h2>
             </div>
 
             <ul class="nav-links">
                 <li>
-                    <a href="dashboard.php?page=overview" class="<?php echo $page == 'overview' ? 'active' : ''; ?>">
-                        <i class="fas fa-chart-pie"></i> Insights & Reports
+                    <a href="dashboard.php?page=overview" class="<?php echo $page == 'overview' ? 'active' : ''; ?>"style="color: black" >
+                        <i class="fas fa-chart-pie" style="color: black"></i> Insights & Reports
                     </a>
                 </li>
                 
                 <li>
-                    <a href="dashboard.php?page=custody" class="<?php echo $page == 'custody' ? 'active' : ''; ?>">
-                        <i class="fas fa-boxes"></i> Custody Log
+                    <a href="dashboard.php?page=custody" class="<?php echo $page == 'custody' ? 'active' : ''; ?>" style="color: black">
+                        <i class="fas fa-boxes" style="color: black"></i> Custody Log
                     </a>
                 </li>
                 
                 <li>
-                    <a href="dashboard.php?page=fraud" class="<?php echo $page == 'fraud' ? 'active' : ''; ?>">
+                    <a href="dashboard.php?page=fraud" class="<?php echo $page == 'fraud' ? 'active' : ''; ?>" style="color: black">
                         <i class="fas fa-shield-alt"></i> Fraud Control
                     </a>
                 </li>
