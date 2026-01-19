@@ -50,7 +50,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'overview';
         
         <aside class="sidebar">
             <div class="brand-box" style="padding: 20px; border-bottom: 1px solid #0056b3;">
-                <h2 style="margin: 0; color: #0056b3;">UniFind <span style="font-size:0.8rem; background:#27ae60; padding:2px 6px; border-radius:4px;">STAFF</span></h2>
+                <h2 style="margin: 0; color: #0056b3;">UniFind <span style="font-size:0.8rem; background: #0f91dc; padding:2px 6px; border-radius:4px; color:white;">STAFF</span></h2>
             </div>
 
             <ul class="nav-links">
@@ -73,8 +73,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'overview';
                 </li>
             </ul>
 
-            <div class="sidebar-footer" style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                <a href="../../../Student/MVC/php/logout.php" class="btn-primary" style="text-align: center; display: block; background: #51b4f1; border:none;">Logout</a>
+            <div class="sidebar-footer" style="padding: 20px;">
+                <a href="../../../Student/MVC/php/logout.php"class="btn-primary" style="text-align: center; display: block; text-decoration: none;">Logout</a>
             </div>
         </aside>
 

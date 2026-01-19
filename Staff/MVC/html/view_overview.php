@@ -1,9 +1,10 @@
 <?php
+// 1. TOP CARDS DATA
 $items_custody = $conn->query("SELECT COUNT(*) as c FROM items WHERE status='custody'")->fetch_assoc()['c'];
 $items_returned = $conn->query("SELECT COUNT(*) as c FROM items WHERE status='claimed'")->fetch_assoc()['c'];
 $items_pending = $conn->query("SELECT COUNT(*) as c FROM items WHERE status='found'")->fetch_assoc()['c'];
 
-//CHART DATA Most Common Categories
+// 2. PIE CHART: Categories (All Items)
 $cat_query = $conn->query("SELECT category, COUNT(*) as count FROM items GROUP BY category");
 $cat_labels = [];
 $cat_data = [];
@@ -12,12 +13,19 @@ while($row = $cat_query->fetch_assoc()) {
     $cat_data[] = $row['count'];
 }
 
-//  CHART DATA: High-Risk Locations
-$loc_query = $conn->query("SELECT location, COUNT(*) as count FROM items WHERE status='lost' GROUP BY location ORDER BY count DESC LIMIT 5");
+// 3. BAR CHART: Locations (FIXED)
+// Removed "WHERE status='lost'" so it shows ALL activity (Lost + Found + Custody)
+// Added "WHERE location != ''" to prevent blank entries
+$loc_query = $conn->query("SELECT location, COUNT(*) as count 
+                           FROM items 
+                           WHERE location != '' 
+                           GROUP BY location 
+                           ORDER BY count DESC 
+                           LIMIT 5");
 $loc_labels = [];
 $loc_data = [];
 while($row = $loc_query->fetch_assoc()) {
-    $loc_labels[] = $row['location'];
+    $loc_labels[] = trim($row['location']); 
     $loc_data[] = $row['count'];
 }
 ?>
@@ -46,44 +54,66 @@ while($row = $loc_query->fetch_assoc()) {
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
     
     <div class="card-box">
-        <h3 class="section-header"><i class="fas fa-chart-pie"></i> Lost Item Categories</h3>
-        <canvas id="categoryChart"></canvas>
+        <h3 class="section-header"><i class="fas fa-chart-pie"></i> Item Categories</h3>
+        <div style="height: 300px; display: flex; justify-content: center;">
+            <canvas id="categoryChart"></canvas>
+        </div>
     </div>
 
     <div class="card-box">
-        <h3 class="section-header"><i class="fas fa-map-marker-alt"></i> Frequent Loss Locations</h3>
-        <canvas id="locationChart"></canvas>
+        <h3 class="section-header"><i class="fas fa-map-marker-alt"></i> High Lost/Found Locations</h3>
+        <div style="height: 300px;">
+            <canvas id="locationChart"></canvas>
+        </div>
     </div>
 </div>
 
 <script>
-    //Category Pie Chart
+    // 1. PIE CHART CONFIG
     new Chart(document.getElementById('categoryChart'), {
         type: 'doughnut',
         data: {
             labels: <?php echo json_encode($cat_labels); ?>,
             datasets: [{
                 data: <?php echo json_encode($cat_data); ?>,
-                backgroundColor: ['#3498db', '#e74c3c', '#f1c40f', '#2ecc71', '#9b59b6', '#34495e']
+                backgroundColor: ['#3498db', '#2ecc71','#9b59b6', '#f1c40f', '#e74c3c', '#34495e'],
+                borderWidth: 1
             }]
         },
-        options: { responsive: true }
+        options: { 
+            responsive: true,
+            maintainAspectRatio: false
+        }
     });
 
-    // Location Bar Chart
+    // 2. BAR CHART CONFIG
     new Chart(document.getElementById('locationChart'), {
         type: 'bar',
         data: {
             labels: <?php echo json_encode($loc_labels); ?>,
             datasets: [{
-                label: 'Number of Lost Reports',
+                label: 'Total Reports (Lost & Found)', // Updated Label
                 data: <?php echo json_encode($loc_data); ?>,
-                backgroundColor: '#e74c3c'
+                backgroundColor: '#e74c3c',
+                borderRadius: 4,
+                maxBarThickness: 50 // Keeps bars looking nice
             }]
         },
         options: { 
             responsive: true,
-            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+            maintainAspectRatio: false,
+            scales: { 
+                y: { 
+                    beginAtZero: true, 
+                    ticks: { stepSize: 1, precision: 0 } // Forces whole numbers
+                },
+                x: {
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
         }
     });
 </script>

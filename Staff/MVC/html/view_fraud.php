@@ -13,8 +13,8 @@ $recent_posts = $conn->query("SELECT * FROM items WHERE status IN ('lost', 'foun
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 
-    <div class="card-box" style="border-top: 4px solid #c0392b;">
-        <h3 class="section-header" style="border-color: #c0392b; color: #c0392b;">
+    <div class="card-box" style="border-top: 4px solid #12a2ce;">
+        <h3 class="section-header" style="border-color: #1585cb; color: #c0392b;">
             <i class="fas fa-user-slash"></i> Suspicious Users
         </h3>
         <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">
@@ -65,8 +65,8 @@ $recent_posts = $conn->query("SELECT * FROM items WHERE status IN ('lost', 'foun
         </table>
     </div>
 
-    <div class="card-box" style="border-top: 4px solid #f39c12;">
-        <h3 class="section-header" style="border-color: #f39c12; color: #e67e22;">
+    <div class="card-box" style="border-top: 4px solid #0d8aea;">
+        <h3 class="section-header" style="border-color: #1292f3; color: #090909;">
             <i class="fas fa-images"></i> Content Review
         </h3>
         <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">

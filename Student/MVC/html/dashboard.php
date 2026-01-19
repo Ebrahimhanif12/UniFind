@@ -84,7 +84,7 @@ if ($announcement) {
                 <li><a href="dashboard.php?page=report_found" class="<?php echo $page == 'report_found' ? 'active' : ''; ?>"><i class="fas fa-hand-holding-heart"></i> Post Found Item</a></li>
             </ul>
 
-            <div class="sidebar-footer">
+            <div class="sidebar-footer ">
                 <a href="../php/logout.php" class="btn-primary" style="text-align: center; display: block; text-decoration: none;">Logout</a>
             </div>
         </aside>
