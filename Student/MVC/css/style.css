@@ -333,3 +333,37 @@ body.auth-mode {
 .icon-blue { background: #eef4ff; color: var(--primary-blue); }
 .icon-gold { background: #fff8e1; color: #f39c12; }
 .icon-green { background: #e8f5e9; color: #2ecc71; }
+
+/* --- ANNOUNCEMENT BANNER --- */
+.announcement-banner {
+    width: 100%;
+    padding: 15px 20px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: slideDown 0.5s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Color Types (Matches Admin Selection) */
+.announcement-banner.info {
+    background-color: #3498db; /* Blue */
+}
+
+.announcement-banner.warning {
+    background-color: #f39c12; /* Orange */
+}
+
+.announcement-banner.danger {
+    background-color: #e74c3c; /* Red */
+}
+
+/* Animation */
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
